@@ -35,19 +35,19 @@ var Sala = require("./schemas/salas");
 //roteamento
 var router = express.Router();
 
-//funcao middleware pare ter acesso ao objeto de solicitacao, objeto de resposta e a proxima funcao
+//manipulando a rota para carregar funcoes de middleware em um caminho para todos os metodos de solicitacao
 router.use(function(req, res, next) {
-  console.log("Pagina inicial do middleware");
-  //definindo site de origem. O * permite qualquer site faça conexão.
+  console.log("Operação Realizada no Postman...");
+  //definindo site de origem. O * permite que qualquer site faça conexão.
   res.header("Access-Control-Allow-Origin", "*");
   //definindo os metodos
   res.header("Access-Control-Allow-Methods", "GET, PUT, DELETE, POST");
-  //configuracao do cors
+  //configurando o cors
   app.use(cors());
   next();
 });
 
-//rota raiz 
+//testando a rota para ter certeza que esta funcionando
 app.get("/", (req, res) => {
   res.send("Bem Vindo ao Sistema de Gerenciamento...");
 }); 
@@ -155,7 +155,9 @@ router
     });
   })
 
+//registrando as rotas com o /api
 app.use("/api", router);
 
+//iniciando o servidor
 app.listen(port);
 console.log("Iniciando a aplicação na porta " + port);
